@@ -52,7 +52,7 @@ function App() {
   const favlistdata = useFavListData();
   return (
     <div>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route element={<NavLayout />}>
             <Route path="/" element={<Main favlistdata={favlistdata} />} />

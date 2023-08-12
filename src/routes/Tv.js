@@ -30,7 +30,7 @@ const Tv = () => {
 
   function getTvPopular() {
     return axios.get(
-      "http://api.themoviedb.org/3/tv/popular?api_key=c4e59022826dc465ea5620d6adaa6813"
+      "https://api.themoviedb.org/3/tv/popular?api_key=c4e59022826dc465ea5620d6adaa6813"
     );
   }
 
