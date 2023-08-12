@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/react-wavve-clone/static/css/main.f0e6e668.css",
-    "main.js": "/react-wavve-clone/static/js/main.7cda726e.js",
+    "main.js": "/react-wavve-clone/static/js/main.6e9372be.js",
     "static/js/787.7ad5a886.chunk.js": "/react-wavve-clone/static/js/787.7ad5a886.chunk.js",
     "static/media/Wavve.svg": "/react-wavve-clone/static/media/Wavve.f30a338da62a8726ad2b2c2e0b0edf2f.svg",
     "index.html": "/react-wavve-clone/index.html",
     "main.f0e6e668.css.map": "/react-wavve-clone/static/css/main.f0e6e668.css.map",
-    "main.7cda726e.js.map": "/react-wavve-clone/static/js/main.7cda726e.js.map",
+    "main.6e9372be.js.map": "/react-wavve-clone/static/js/main.6e9372be.js.map",
     "787.7ad5a886.chunk.js.map": "/react-wavve-clone/static/js/787.7ad5a886.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f0e6e668.css",
-    "static/js/main.7cda726e.js"
+    "static/js/main.6e9372be.js"
   ]
 }
