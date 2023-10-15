@@ -501,17 +501,17 @@ footer span {
     width: 1240px;
     margin: 0 auto;
     padding: 0;
+    margin-bottom: 100px;
   }
   article .swiper-slide {
     height: 360px;
   }
   article h2 {
     padding-left: 0;
+    margin-bottom: 20px;
   }
   article .swiper-wrapper {
     padding-left: 0;
-    margin-top: 20px;
-    padding-bottom: 100px;
   }
   .poster-box-img {
     margin-top: -50px;
