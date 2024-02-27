@@ -92,7 +92,9 @@ const Search = () => {
               </article>
             </>
           ) : (
-            <>"{keyword}"를 포함하는 검색 결과가 없습니다.</>
+            <p className="result-message pc-widths">
+              "{keyword}"를 포함하는 검색 결과가 없습니다.
+            </p>
           )}
         </div>
       )}
