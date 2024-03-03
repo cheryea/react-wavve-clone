@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/react-wavve-clone/static/css/main.01c0d5db.css",
-    "main.js": "/react-wavve-clone/static/js/main.2144bb8e.js",
+    "main.css": "/react-wavve-clone/static/css/main.5dd23719.css",
+    "main.js": "/react-wavve-clone/static/js/main.1831f658.js",
     "static/js/787.7ad5a886.chunk.js": "/react-wavve-clone/static/js/787.7ad5a886.chunk.js",
     "static/media/Wavve.svg": "/react-wavve-clone/static/media/Wavve.f30a338da62a8726ad2b2c2e0b0edf2f.svg",
     "index.html": "/react-wavve-clone/index.html",
-    "main.01c0d5db.css.map": "/react-wavve-clone/static/css/main.01c0d5db.css.map",
-    "main.2144bb8e.js.map": "/react-wavve-clone/static/js/main.2144bb8e.js.map",
+    "main.5dd23719.css.map": "/react-wavve-clone/static/css/main.5dd23719.css.map",
+    "main.1831f658.js.map": "/react-wavve-clone/static/js/main.1831f658.js.map",
     "787.7ad5a886.chunk.js.map": "/react-wavve-clone/static/js/787.7ad5a886.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.01c0d5db.css",
-    "static/js/main.2144bb8e.js"
+    "static/css/main.5dd23719.css",
+    "static/js/main.1831f658.js"
   ]
 }
