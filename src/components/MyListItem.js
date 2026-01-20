@@ -2,25 +2,23 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const MyListItem = ({ list, favlistdata }) => {
-  const [mylist, setMyList] = useState([]);
-  const [loading, setLoding] = useState(true);
-  const IMG_BASE_URL = "https://image.tmdb.org/t/p/w400";
+const MyListItem = ({ list }) => {
+  const [mylist, setMyList] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   function getFavList() {
     return axios.get(
-      `https://api.themoviedb.org/3/${list.genre}/${list.favid}?api_key=c4e59022826dc465ea5620d6adaa6813&language=ko`
+      `${BASE_URL}/${list.genre}/${list.favid}`,
+      { params: { api_key: API_KEY, language: "ko" } }
     );
   }
 
   useEffect(() => {
-    axios.all([getFavList()]).then(
-      axios.spread(function (FavList) {
-        setMyList(FavList.data);
-        setLoding(false);
-      })
-    );
-  }, []);
+    getFavList().then((res) => {
+      setMyList(res.data);
+      setLoading(false);
+    });
+  }, [list.genre, list.favid]);
 
   return (
     <>
