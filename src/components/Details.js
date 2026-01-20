@@ -7,12 +7,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // import required modules
 import { Navigation } from "swiper/modules";
 
+const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
+const BASE_URL = "https://api.themoviedb.org/3";
+
 const Details = ({ favlistdata }) => {
   const { genre, id } = useParams();
   const [movies, setMovies] = useState([]);
   const [similar, setSimilar] = useState([]);
   const [credits, setCredits] = useState([]);
-  const [loading, setLoding] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [openTab, setOpenTab] = useState(1);
   const [favicon, setFavicon] = useState(0);
   const genres = String(genre);
@@ -23,29 +26,33 @@ const Details = ({ favlistdata }) => {
 
   function getMovie() {
     return axios.get(
-      `https://api.themoviedb.org/3/${genre}/${id}?api_key=c4e59022826dc465ea5620d6adaa6813&language=ko`
+      `${BASE_URL}/${genre}/${id}`,
+      { params: { api_key: API_KEY, language: "ko" } }
     );
   }
 
   function getSimilarMovie() {
     return axios.get(
-      `https://api.themoviedb.org/3/${genre}/${id}/similar?api_key=c4e59022826dc465ea5620d6adaa6813&language=ko`
+      `${BASE_URL}/${genre}/${id}/similar`,
+      { params: { api_key: API_KEY, language: "ko" } }
     );
   }
 
-  function getCreditsrMovie() {
+  function getCreditsMovie() {
     return axios.get(
-      `https://api.themoviedb.org/3/${genre}/${id}/credits?api_key=c4e59022826dc465ea5620d6adaa6813&language=ko`
+      `${BASE_URL}/${genre}/${id}/credits`,
+      { params: { api_key: API_KEY, language: "ko" } }
     );
   }
+
 
   useEffect(() => {
-    axios.all([getMovie(), getSimilarMovie(), getCreditsrMovie()]).then(
+    axios.all([getMovie(), getSimilarMovie(), getCreditsMovie()]).then(
       axios.spread(function (movie, similar, credits) {
         setMovies(movie.data);
         setSimilar(similar.data);
         setCredits(credits.data);
-        setLoding(false);
+        setLoading(false);
       })
     );
   }, [id]);
@@ -61,7 +68,8 @@ const Details = ({ favlistdata }) => {
 
   useEffect(() => {
     favicons();
-  });
+  }, [id, favlistdata.favlist]);
+
 
   const commitfav = (e) => {
     e.preventDefault();
@@ -80,6 +88,7 @@ const Details = ({ favlistdata }) => {
     });
     setOpenTab(2);
   };
+
 
   return (
     <>
