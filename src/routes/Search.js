@@ -12,26 +12,31 @@ const Search = () => {
   const { keyword } = useParams();
   const [movies, setMovies] = useState([]);
   const [tvs, setTvs] = useState([]);
-  const [loading, setLoding] = useState(true);
+  const [loading, setLoading] = useState(true);
+
+  const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
+  const BASE_URL = "https://api.themoviedb.org/3";
+  const commonParams = {
+    api_key: API_KEY,
+    language: "ko",
+    page: 1,
+    include_adult: false,
+  };
 
   function getSearchMovie() {
-    return axios.get(
-      `https://api.themoviedb.org/3/search/movie?api_key=c4e59022826dc465ea5620d6adaa6813&language=ko&query=${keyword}&page=1&include_adult=false`
-    );
+    return axios.get(`${BASE_URL}/search/movie`, { params: { ...commonParams, query: keyword } });
   }
 
   function getSearchTv() {
-    return axios.get(
-      `https://api.themoviedb.org/3/search/tv?api_key=c4e59022826dc465ea5620d6adaa6813&language=ko&query=${keyword}&page=1&include_adult=false`
-    );
+    return axios.get(`${BASE_URL}/search/tv`, { params: { ...commonParams, query: keyword } });
   }
 
   useEffect(() => {
     axios.all([getSearchMovie(), getSearchTv()]).then(
-      axios.spread(function (movies, tvs) {
-        setMovies(movies.data);
-        setTvs(tvs.data);
-        setLoding(false);
+      axios.spread((moviesRes, tvsRes) => {
+        setMovies(moviesRes.data);
+        setTvs(tvsRes.data);
+        setLoading(false);
       })
     );
   }, [keyword]);
