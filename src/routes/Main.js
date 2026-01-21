@@ -7,8 +7,18 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // import required modules
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
+const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
+const BASE_URL = "https://api.themoviedb.org/3";
+
+const commonParams = {
+  api_key: API_KEY,
+  language: "ko",
+  page: 1,
+  region: "KR",
+};
+
 const Main = ({ favlistdata }) => {
-  const [loading, setLoding] = useState(true);
+  const [loading, setLoading] = useState(true);
   const genres = "movie";
   const [nowmovie, setNowMovie] = useState([]);
   const [popularmovie, setPopularMovie] = useState([]);
@@ -18,26 +28,27 @@ const Main = ({ favlistdata }) => {
   const [bannermovies, setBannerMovies] = useState([]);
 
   function getMovieNowPlaying() {
-    return axios.get(
-      "https://api.themoviedb.org/3/movie/now_playing?api_key=c4e59022826dc465ea5620d6adaa6813&language=ko&page=1&region=KR"
-    );
+    return axios.get(`${BASE_URL}/movie/now_playing`, {
+      params: commonParams,
+    });
   }
 
   function getMoviePopular() {
-    return axios.get(
-      "https://api.themoviedb.org/3/movie/popular?api_key=c4e59022826dc465ea5620d6adaa6813&language=ko&page=1&region=KR"
-    );
+    return axios.get(`${BASE_URL}/movie/popular`, {
+      params: commonParams,
+    });
   }
+
   function getMovieTopRated() {
-    return axios.get(
-      "https://api.themoviedb.org/3/movie/top_rated?api_key=c4e59022826dc465ea5620d6adaa6813&language=ko&page=1&region=KR"
-    );
+    return axios.get(`${BASE_URL}/movie/top_rated`, {
+      params: commonParams,
+    });
   }
 
   function getMovieUpcoming() {
-    return axios.get(
-      "https://api.themoviedb.org/3/movie/upcoming?api_key=c4e59022826dc465ea5620d6adaa6813&language=ko&page=1&region=KR"
-    );
+    return axios.get(`${BASE_URL}/movie/upcoming`, {
+      params: commonParams,
+    });
   }
 
   useEffect(() => {
@@ -49,7 +60,7 @@ const Main = ({ favlistdata }) => {
         getMovieUpcoming(),
       ])
       .then(
-        axios.spread(function (now, popular, toprated, upcoming) {
+        axios.spread((now, popular, toprated, upcoming) => {
           setNowMovie(now.data);
           setPopularMovie(popular.data);
           setTopMovie(toprated.data);
@@ -58,10 +69,11 @@ const Main = ({ favlistdata }) => {
       );
   }, []);
 
+
   useEffect(() => {
     if (popularmovie.results && popularmovie.results.length > 10) {
       setBannerMovies(popularmovie.results.slice(0, 5));
-      setLoding(false);
+      setLoading(false);
     }
   }, [popularmovie]);
 
