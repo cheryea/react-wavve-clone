@@ -8,35 +8,37 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
 const Tv = () => {
-  const [loading, setLoding] = useState(true);
-  const genres = "tv";
+  const [loading, setLoading] = useState(true);
   const [trendingtv, setTrendingTv] = useState([]);
   const [toptv, setTopTv] = useState([]);
   const [populartv, setPopularTv] = useState([]);
-  const banner = "banner";
   const [bannermovies, setBannerMovies] = useState([]);
 
+  const genres = "tv";
+  const banner = "banner";
+  const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
+  const BASE_URL = "https://api.themoviedb.org/3";
+  const commonParams = {
+    api_key: API_KEY,
+    language: "ko",
+    page: 1,
+  };
+
   function getTvTrending() {
-    return axios.get(
-      "https://api.themoviedb.org/3/trending/tv/day?language=ko-KR&api_key=c4e59022826dc465ea5620d6adaa6813"
-    );
+    return axios.get(`${BASE_URL}/trending/tv/day`, { params: commonParams });
   }
 
   function getTvTopRated() {
-    return axios.get(
-      "https://api.themoviedb.org/3/tv/top_rated?language=ko-KR&api_key=c4e59022826dc465ea5620d6adaa6813"
-    );
+    return axios.get(`${BASE_URL}/tv/top_rated`, { params: commonParams });
   }
 
   function getTvPopular() {
-    return axios.get(
-      "https://api.themoviedb.org/3/tv/popular?api_key=c4e59022826dc465ea5620d6adaa6813"
-    );
+    return axios.get(`${BASE_URL}/tv/popular`, { params: commonParams });
   }
 
   useEffect(() => {
     axios.all([getTvTrending(), getTvTopRated(), getTvPopular()]).then(
-      axios.spread(function (trending, toprated, popular) {
+      axios.spread((trending, toprated, popular) => {
         setTrendingTv(trending.data);
         setTopTv(toprated.data);
         setPopularTv(popular.data);
@@ -47,7 +49,7 @@ const Tv = () => {
   useEffect(() => {
     if (trendingtv.results && trendingtv.results.length > 10) {
       setBannerMovies(trendingtv.results.slice(0, 5));
-      setLoding(false);
+      setLoading(false);
     }
   }, [trendingtv]);
 
